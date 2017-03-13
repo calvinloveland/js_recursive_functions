@@ -122,3 +122,20 @@ document.body.appendChild(pellContainer)
 var tribContainer = tribDom(11)
 tribContainer.setAttribute("style","width:100%;font-size:100px")
 document.body.appendChild(tribContainer)
+
+var infoContainer = document.createElement("div")
+infoContainer.setAttribute("style","text-align:center;")
+var fibInfo = document.createElement("a")
+fibInfo.setAttribute("href","https://oeis.org/A000045")
+fibInfo.innerHTML = "Fibonacci "
+var tribInfo = document.createElement("a")
+tribInfo.setAttribute("href","https://oeis.org/A000073")
+tribInfo.innerHTML = " Tribonacci "
+var pellInfo = document.createElement("a")
+pellInfo.setAttribute("href","https://oeis.org/A000129")
+pellInfo.innerHTML = " Pell"
+
+infoContainer.appendChild(fibInfo)
+infoContainer.appendChild(tribInfo)
+infoContainer.appendChild(pellInfo)
+document.body.appendChild(infoContainer)
