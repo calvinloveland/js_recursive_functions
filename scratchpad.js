@@ -1,7 +1,8 @@
 var css = document.createElement("style");
 css.type = "text/css";
 css.innerHTML = 
-".fibDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}";
+".fibDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}"+
+".pellDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}";
 document.body.appendChild(css);
 
 
@@ -9,7 +10,7 @@ document.body.appendChild(css);
 function fibDom(n){
     var result;
     if(n < 2){
-        return createSpan("fib("+n+") =" + n,"fibSpan")
+        return createSpan("fib("+n+") =" + n,"fibDiv")
     }
     else{
         var newSpan = createSpan("fib("+n+") =","fibDiv")
@@ -21,6 +22,25 @@ function fibDom(n){
         return newSpan
     }
 }
+
+function pellDom(n){
+    var result;
+    if(n < 2){
+        return createSpan("pell("+n+") =" + n,"pellDiv")
+    }
+    else{
+        var newSpan = createSpan("pell("+n+") =","pellDiv")
+        newSpan.appendChild(createDiv("","newline"))
+        var firstPell = pellDom(n-1)
+        firstPell.innerHTML = "2 * " + firstPell.innerHTML;
+        newSpan.appendChild(firstPell)
+        var secondPell = pellDom(n-2)
+        secondPell.innerHTML = " + " + secondPell.innerHTML;
+        newSpan.appendChild(secondPell)
+        return newSpan
+    }
+}
+
 function fib(n){
     if(n < 2){
         return  n;
@@ -30,8 +50,7 @@ function fib(n){
     }
 }
 
-function pell(n,element){
-    element.appendChild(createDiv("pell("+n+")","pellDiv"))
+function pell(n){
     if(n<2){
         return n;
     }
@@ -40,8 +59,7 @@ function pell(n,element){
     }
 }
 
-function trib(n,element){
-    element.appendChild(createDiv("trib("+n+")","tribDiv"))
+function trib(n){
     if(n < 2){
         return 0;
     }
@@ -73,3 +91,7 @@ document.title = "THIS IS A TITLE!";
 var fibContainer = fibDom(11)
 fibContainer.setAttribute("style","width:100%;font-size:100px")
 document.body.appendChild(fibContainer)
+
+var pellContainer = pellDom(11)
+pellContainer.setAttribute("style","width:100%;font-size:100px")
+document.body.appendChild(pellContainer)
