@@ -1,9 +1,9 @@
 var css = document.createElement("style");
 css.type = "text/css";
 css.innerHTML = 
-".fibDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}"+
-".pellDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}"+
-".tribDiv { display: inline-block; width: 33%; vertical-align: top; text-align:center; font-size:33%}";
+".fibDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%; background: linear-gradient(yellow,red)}"+
+".pellDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%; background: linear-gradient(red,blue)}"+
+".tribDiv { display: inline-block; width: 33%; vertical-align: top; text-align:center; font-size:33%; background: linear-gradient(blue,yellow)}";
 document.body.appendChild(css);
 
 
