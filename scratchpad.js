@@ -2,7 +2,8 @@ var css = document.createElement("style");
 css.type = "text/css";
 css.innerHTML = 
 ".fibDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}"+
-".pellDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}";
+".pellDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%}"+
+".tribDiv { display: inline-block; width: 33%; vertical-align: top; text-align:center; font-size:33%}";
 document.body.appendChild(css);
 
 
@@ -37,6 +38,28 @@ function pellDom(n){
         var secondPell = pellDom(n-2)
         secondPell.innerHTML = " + " + secondPell.innerHTML;
         newSpan.appendChild(secondPell)
+        return newSpan
+    }
+}
+
+function tribDom(n){
+    var result;
+    if(n < 2){
+        return createSpan("trib("+n+") =" + 0,"tribDiv")
+    }
+    else if(n == 2){
+        return createSpan("trib(2) =1","tribDiv")
+    }
+    else{
+        var newSpan = createSpan("trib("+n+") =","tribDiv")
+        newSpan.appendChild(createDiv("","newline"))
+        newSpan.appendChild(tribDom(n-1))
+        var firstTrib = tribDom(n-2)
+        firstTrib.innerHTML = " + " + firstTrib.innerHTML;
+        newSpan.appendChild(firstTrib)
+        var secondTrib = tribDom(n-3)
+        secondTrib.innerHTML = " + " + secondTrib.innerHTML;
+        newSpan.appendChild(secondTrib)
         return newSpan
     }
 }
@@ -86,7 +109,7 @@ function createSpan(text, className){
 }
 
 //document.write("Fib(11): " + fib(11) + " Pell(11): " + pell(11)+" Trib(11): "+trib(11));
-document.title = "THIS IS A TITLE!";
+document.title = "TITLE!";
 
 var fibContainer = fibDom(11)
 fibContainer.setAttribute("style","width:100%;font-size:100px")
@@ -95,3 +118,7 @@ document.body.appendChild(fibContainer)
 var pellContainer = pellDom(11)
 pellContainer.setAttribute("style","width:100%;font-size:100px")
 document.body.appendChild(pellContainer)
+
+var tribContainer = tribDom(11)
+tribContainer.setAttribute("style","width:100%;font-size:100px")
+document.body.appendChild(tribContainer)
