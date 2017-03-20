@@ -1,11 +1,3 @@
-var css = document.createElement("style");
-css.type = "text/css";
-css.innerHTML = 
-".fibDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%; background: linear-gradient(yellow,red)}"+
-".pellDiv { display: inline-block; width: 50%; vertical-align: top; text-align:center; font-size:50%; background: linear-gradient(red,blue)}"+
-".tribDiv { display: inline-block; width: 33%; vertical-align: top; text-align:center; font-size:33%; background: linear-gradient(blue,yellow)}";
-document.body.appendChild(css);
-
 
 
 function fibDom(n){
@@ -14,7 +6,7 @@ function fibDom(n){
         return createSpan("fib("+n+") =" + n,"fibDiv")
     }
     else{
-        var newSpan = createSpan("fib("+n+") =","fibDiv")
+        var newSpan = createSpan("fib("+n+") = " + fib(n) + " =","fibDiv")
         newSpan.appendChild(createDiv("","newline"))
         newSpan.appendChild(fibDom(n-1))
         var secondFib = fibDom(n-2)
@@ -30,7 +22,7 @@ function pellDom(n){
         return createSpan("pell("+n+") =" + n,"pellDiv")
     }
     else{
-        var newSpan = createSpan("pell("+n+") =","pellDiv")
+        var newSpan = createSpan("pell("+n+") = " + pell(n) + " =","pellDiv")
         newSpan.appendChild(createDiv("","newline"))
         var firstPell = pellDom(n-1)
         firstPell.innerHTML = "2 * " + firstPell.innerHTML;
@@ -51,7 +43,7 @@ function tribDom(n){
         return createSpan("trib(2) =1","tribDiv")
     }
     else{
-        var newSpan = createSpan("trib("+n+") =","tribDiv")
+        var newSpan = createSpan("trib("+n+") = " + trib(n) + " =","tribDiv")
         newSpan.appendChild(createDiv("","newline"))
         newSpan.appendChild(tribDom(n-1))
         var firstTrib = tribDom(n-2)
@@ -111,17 +103,37 @@ function createSpan(text, className){
 //document.write("Fib(11): " + fib(11) + " Pell(11): " + pell(11)+" Trib(11): "+trib(11));
 document.title = "TITLE!";
 
-var fibContainer = fibDom(11)
-fibContainer.setAttribute("style","width:100%;font-size:100px")
-document.body.appendChild(fibContainer)
+function fibButton(clicked){
+    var parentDiv = clicked.parentNode;
+    var fibContainer = fibDom(parentDiv.querySelector("input").value)
+    fibContainer.setAttribute("style","width:100%;font-size:100px")
+    if(parentDiv.querySelector("span"))
+        parentDiv.removeChild(parentDiv.querySelector("span"))
+    parentDiv.appendChild(fibContainer)
+}
 
-var pellContainer = pellDom(11)
-pellContainer.setAttribute("style","width:100%;font-size:100px")
-document.body.appendChild(pellContainer)
+function pellButton(clicked){
+    var parentDiv = clicked.parentNode;
+    var pellContainer = pellDom(parentDiv.querySelector("input").value)
+    pellContainer.setAttribute("style","width:100%;font-size:100px")
+    if(parentDiv.querySelector("span"))
+        parentDiv.removeChild(parentDiv.querySelector("span"))
+    parentDiv.appendChild(pellContainer)
+}
+function tribButton(clicked){
+    var parentDiv = clicked.parentNode;
+    var tribContainer = tribDom(parentDiv.querySelector("input").value)
+    tribContainer.setAttribute("style","width:100%;font-size:100px")
+    if(parentDiv.querySelector("span"))
+        parentDiv.removeChild(parentDiv.querySelector("span"))
+    parentDiv.appendChild(tribContainer)
+}
 
-var tribContainer = tribDom(11)
-tribContainer.setAttribute("style","width:100%;font-size:100px")
-document.body.appendChild(tribContainer)
+function updateSlider(changed){
+    var parentDiv = changed.parentNode;
+    var button = parentDiv.querySelector("button");
+    button.innerHTML = button.className + "(" + changed.value + ")";
+}
 
 var infoContainer = document.createElement("div")
 infoContainer.setAttribute("style","text-align:center;")
